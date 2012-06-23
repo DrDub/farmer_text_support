@@ -2,6 +2,7 @@ Farmer Text Support
 ===================
 
 SMS &lt;-> Recorded Phone Calls Community Knowledge Base
+More information: http://wiki.duboue.net/index.php/Farmer_Text_Support
 
 In rural areas cell phones are the only access to technology available. 
 This project targets allowing communities to share knowledge through the 
