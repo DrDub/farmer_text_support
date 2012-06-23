@@ -4,6 +4,8 @@ from django.template.context import RequestContext
 
 from .models import Component
 
+from datetime import datetime
+
 import requests
 
 def home(request):
@@ -27,15 +29,44 @@ def register(request,component=None):
     return HttpResponse('<h1>Success</h1>')
 
 def wrap(request, component, **kwargs):
+     return HttpResponse(_wrap(request, component, **kwargs))
+
+def _component_url(component):
     url = Component.objects.filter(name=component)
     if url.count() == 0:
-        return HttpResponse('<h1>Not implemented</h1>')
-    url = url[0].url
+        raise Http404('Not implemented')
+    return url[0].url
+    
+
+def _wrap(request, component, **kwargs):
+    url = _component_url(component)
     if request.method == 'POST':
-        return HttpResponse(requests.post(url + '/' + request.path,
-                                          data=request.POST).text)
+       return requests.post(url + '/' + request.path, data=request.POST).text
     else:
-        return HttpResponse(requests.get(url + '/' + request.path).text)
+        return requests.get(url + '/' + request.path).text
+
+def question_new(request, component,**kwargs):
+    response = _wrap(request, 'question', **kwargs)
+    if len(response) > 0:
+        # valid question ID
+        OutstandingQuestion(
+            question_id = int(response),
+            since = datetime.now()
+        ).save()
+    return HttpResponse(response)
+
+def answer_status(request, component,**kwargs):
+    response = _wrap(request, 'question', **kwargs)
+    if request.method == 'POST' and request.POST['accepted_yes_no'] in ['1','True','true']:
+        # get question id associated with answer id
+        url = _component_url(component)
+        question_id = requests.get("%s/answer/%s/question" % (url,kwargs['aid'])).text
+        outstanding = OutstandingQuestion.objects.filter(question_id=question_id)
+        if outstanding.count()>0:
+            outstanding.delete()
+    return HttpResponse(response)
+
+
 
 def stub(request,**kwargs):
     return HttpResponse('<h1>Not implemented</h1>')

@@ -8,21 +8,23 @@ urlpatterns = patterns('',
    url(r'^$', 'fts_main.views.home', name='home'),
 
    # main
-   url(r'^register/(?P<component>[^/]+)$', 'fts_main.views.stub', name='component_register'),
+   url(r'^register/(?P<component>[^/]+)$', 'fts_main.views.register', name='component_register'),
      # POST url
 
    # question
-   url(r'^question/new$', 'fts_main.views.wrap', {'component':'question'},
+   url(r'^question/new$', 'fts_main.views.question_new', {'component':'question'},
        name='question_new'),
      # POST question_text
    url(r'^question/(?P<qid>[0-9]+)/answer$', 'fts_main.views.wrap', {'component':'question'},
        name='question_answer'),
    url(r'^answer/(?P<aid>[0-9]+)/sound$', 'fts_main.views.wrap', {'component':'question'},
        name='answer_sound'),
+   url(r'^answer/(?P<aid>[0-9]+)/question$', 'fts_main.views.wrap', {'component':'question'},
+       name='answer_question'),
    url(r'^answer/(?P<qid>[0-9]+)/new$', 'fts_main.views.wrap', {'component':'question'},
        name='answer_new'),
-     # POST sound_file                       
-   url(r'^answer/(?P<aid>[0-9]+)/status$', 'fts_main.views.wrap', {'component':'question'},
+     # POST sound_file
+   url(r'^answer/(?P<aid>[0-9]+)/status$', 'fts_main.views.answer_status', {'component':'question'},
        name='answer_status'),
      # POST accepted_yes_no
 
