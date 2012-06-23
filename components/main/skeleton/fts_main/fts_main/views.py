@@ -76,7 +76,7 @@ def answer_status(request, component,**kwargs):
                      data={'question_id': question_id}).text
         
         # notify answer scout
-        requests.post(_component_url('answer') + "/question_status",
+        requests.post(_component_url('answer') + "/expert/question_status",
                       data={'question_id': question_id,
                             'user_id': user_id,
                             'accepted_yes_no': accepted})
