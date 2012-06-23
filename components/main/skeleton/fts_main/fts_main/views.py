@@ -53,17 +53,34 @@ def question_new(request, component,**kwargs):
             question_id = int(response),
             since = datetime.now()
         ).save()
+        
+        # notify answer scout
+        url = _component_url('answer')
+        requests.post(url + "/new_question",data={'question_id':response})
+    
     return HttpResponse(response)
 
 def answer_status(request, component,**kwargs):
     response = _wrap(request, 'question', **kwargs)
-    if request.method == 'POST' and request.POST['accepted_yes_no'] in ['1','True','true']:
+    if request.method == 'POST':
         # get question id associated with answer id
-        url = _component_url(component)
-        question_id = requests.get("%s/answer/%s/question" % (url,kwargs['aid'])).text
-        outstanding = OutstandingQuestion.objects.filter(question_id=question_id)
-        if outstanding.count()>0:
-            outstanding.delete()
+        question_id = requests.get("%s/answer/%s/question" % (_component_url('question'),kwargs['aid'])).text
+        accepted = request.POST['accepted_yes_no'] in ['1','True','true']
+        if accepted:
+            outstanding = OutstandingQuestion.objects.filter(question_id=question_id)
+            if outstanding.count()>0:
+                outstanding.delete()
+
+        # get user associated with question id
+        user_id = requests.get(_component_url('user') + "/user/search/by_question",
+                     data={'question_id': question_id}).text
+        
+        # notify answer scout
+        requests.post(_component_url('answer') + "/question_status",
+                      data={'question_id': question_id,
+                            'user_id': user_id,
+                            'accepted_yes_no': accepted})
+        
     return HttpResponse(response)
 
 

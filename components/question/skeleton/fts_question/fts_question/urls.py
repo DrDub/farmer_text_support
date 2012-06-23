@@ -13,7 +13,7 @@ urlpatterns = patterns('',
    url(r'^answer/(?P<aid>[0-9]+)/sound$', 'fts_question.views.stub',
        name='answer_sound'),
    url(r'^answer/(?P<aid>[0-9]+)/question$', 'fts_question.views.stub',
-       name='answer_questio'),
+       name='answer_question'),
    url(r'^answer/(?P<qid>[0-9]+)/new$', 'fts_question.views.stub',
        name='answer_new'),
      # POST sound_file                       

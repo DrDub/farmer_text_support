@@ -4,7 +4,8 @@ urlpatterns = patterns('',
    url(r'^user/new$', 'fts_user.views.stub', name='user_new'),
      # POST phone_number
    url(r'^user/(?P<id>[0-9]+)$', 'fts_user.views.stub', name='user_view'),
-   url(r'^user/search/by_contact$', 'fts_user.views.stub', name='user_search'),
+   url(r'^user/search/by_contact$', 'fts_main.views.wrap', name='user_search_contact'),
+   url(r'^user/search/by_question$', 'fts_main.views.wrap', name='user_search_question'),
    url(r'^user/(?P<uid>[0-9]+)/question/new$', 'fts_user.views.stub',
        name='user_question_new'),
      # POST question_id

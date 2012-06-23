@@ -5,15 +5,15 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-   url(r'^expert/targets/(?P<qid>[0-9]+)$', 'fts_answer.views.stub',
+   url(r'^expert/targets/(?P<qid>[0-9]+)$', 'fts_answer.views.stub', 
        name='expert_targets'),
-   url(r'^expert/asked/(?P<uid>[0-9]+)$', 'fts_answer.views.stub',
-       name='expert_asked'),
-      # POST question_text
-   url(r'^expert/answered/(?P<qid>[0-9]+)$', 'fts_answer.views.stub',
-       name='expert_answered'),
-      # POST user_id
-   url(r'^expert/status/(?P<aid>[0-9]+)$', 'fts_answer.views.stub',
-       name='expert_status'),
-      # POST user_id, accepted_yes_no
+   url(r'^expert/new_question$', 'fts_answer.views.stub', 
+       name='expert_new_question'),
+      # POST question_id
+   url(r'^expert/new_answer$', 'fts_answer.views.stub', 
+       name='expert_new_answer'),
+      # POST user_id, question_id
+   url(r'^expert/answer_status$', 'fts_answer.views.stub', 
+       name='expert_answer_status'),
+      # POST user_id, question_id, accepted_yes_no
 )

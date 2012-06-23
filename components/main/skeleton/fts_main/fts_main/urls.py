@@ -32,7 +32,8 @@ urlpatterns = patterns('',
    url(r'^user/new$', 'fts_main.views.wrap', {'component':'user'}, name='user_new'),
      # POST phone_number
    url(r'^user/(?P<id>[0-9]+)$', 'fts_main.views.wrap', {'component':'user'}, name='user_view'),
-   url(r'^user/search/by_contact$', 'fts_main.views.wrap', {'component':'user'}, name='user_search'),
+   url(r'^user/search/by_contact$', 'fts_main.views.wrap', {'component':'user'}, name='user_search_contact'),
+   url(r'^user/search/by_question$', 'fts_main.views.wrap', {'component':'user'}, name='user_search_question'),
    url(r'^user/(?P<uid>[0-9]+)/question/new$', 'fts_main.views.wrap', {'component':'user'},
        name='user_question_new'),
      # POST question_id
@@ -54,13 +55,13 @@ urlpatterns = patterns('',
    # answer scout
    url(r'^expert/targets/(?P<qid>[0-9]+)$', 'fts_main.views.wrap', {'component':'answer'},
        name='expert_targets'),
-   url(r'^expert/asked/(?P<uid>[0-9]+)$', 'fts_main.views.wrap', {'component':'answer'},
-       name='expert_asked'),
-      # POST question_text
-   url(r'^expert/answered/(?P<qid>[0-9]+)$', 'fts_main.views.wrap', {'component':'answer'},
-       name='expert_answered'),
-      # POST user_id
-   url(r'^expert/status/(?P<aid>[0-9]+)$', 'fts_main.views.wrap', {'component':'answer'},
-       name='expert_status'),
-      # POST user_id, accepted_yes_no
+   url(r'^expert/new_question$', 'fts_main.views.wrap', {'component':'answer'},
+       name='expert_new_question'),
+      # POST question_id
+   url(r'^expert/new_answer$', 'fts_main.views.wrap', {'component':'answer'},
+       name='expert_new_answer'),
+      # POST user_id, question_id
+   url(r'^expert/answer_status$', 'fts_main.views.wrap', {'component':'answer'},
+       name='expert_answer_status'),
+      # POST user_id, question_id, accepted_yes_no
    )
