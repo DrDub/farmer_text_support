@@ -5,19 +5,19 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-   url(r'^expert/who$', 'fts_answer.views.stub', 
+   url(r'^expert/who$', 'fts_answer.answers.views.who', 
        name='expert_who'),
       # POST question_id
-   url(r'^expert/new_user$', 'fts_answer.views.stub', 
+   url(r'^expert/new_user$', 'fts_answer.answers.views.new_user', 
        name='expert_new_user'),
       # POST user_id
-   url(r'^expert/new_question$', 'fts_answer.views.stub', 
+   url(r'^expert/new_question$', 'fts_answer.answers.views.new_question', 
        name='expert_new_question'),
       # POST question_id
-   url(r'^expert/new_answer$', 'fts_answer.views.stub', 
+   url(r'^expert/new_answer$', 'fts_answer.answers.views.ignore', 
        name='expert_new_answer'),
       # POST user_id, question_id
-   url(r'^expert/new_answer_status$', 'fts_answer.views.stub', 
+   url(r'^expert/new_answer_status$', 'fts_answer.answers.views.ignore', 
        name='expert_answer_status'),
       # POST user_id, question_id, answer_id, accepted_yes_no
 )
