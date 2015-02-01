@@ -41,7 +41,7 @@ def broadcast_question():
             # contact the user with the new answer
             sound_file = requests.get("%s/answer/%s/sound" % (_component_url('question'), answer_id)).text
 
-            requests.post("%s/phone/call" % (settings.SITE_URL),
+            requests.post("%s/comm/phone/call" % (settings.SITE_URL),
                                     data={'user_id':user_id,
                                           'message_type': 'relay_answer',
                                           'message_data': '{"sound_file":"'+sound_file+'"}'))
@@ -54,11 +54,11 @@ def broadcast_question():
 
         # bad answers, continue
 
-    # ask the answer scout for a user_id
+    # ask the expert for a user_id
     user_id = requests.post(_component_url('answer') + "/expert/who",
                   data={'question_id': question_id})
     if len(user_id) > 0:
-        requests.post(_component_url('sms') + "/sms/send",
+        requests.post(_component_url('sms') + "/comm/sms/send",
                       data={'user_id':user_id,
                             'message_type':'ask',
                             'message_data':'{"question_id": "' + question_id + '"}'})

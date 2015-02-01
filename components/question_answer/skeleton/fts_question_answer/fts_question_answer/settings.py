@@ -1,4 +1,4 @@
-# Django settings for fts_question project.
+# Django settings for fts_question_answer project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -100,10 +100,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'fts_question.urls'
+ROOT_URLCONF = 'fts_question_answer.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'fts_question.wsgi.application'
+WSGI_APPLICATION = 'fts_question_answer.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -152,3 +152,5 @@ LOGGING = {
         },
     }
 }
+
+FTS_MAIN_URL="http://localhost:8000"

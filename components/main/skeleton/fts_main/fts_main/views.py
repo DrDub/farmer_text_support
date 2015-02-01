@@ -54,8 +54,8 @@ def question_new(request, component,**kwargs):
             since = datetime.now()
         ).save()
         
-        # notify answer scout
-        url = _component_url('answer')
+        # notify expert
+        url = _component_url('expert')
         requests.post(url + "/new_question",data={'question_id':response})
     
     return HttpResponse(response)
