@@ -12,19 +12,19 @@ urlpatterns = patterns('',
      # POST url
 
    # question
-   url(r'^question/new$', 'fts_main.views.question_new', {'component':'question'},
+   url(r'^question/new$', 'fts_main.views.question_new', {'component':'question_answer'},
        name='question_new'),
      # POST question_text
-   url(r'^question/(?P<qid>[0-9]+)/answer$', 'fts_main.views.wrap', {'component':'question'},
+   url(r'^question/(?P<qid>[0-9]+)/answer$', 'fts_main.views.wrap', {'component':'question_answer'},
        name='question_answer'),
-   url(r'^answer/(?P<aid>[0-9]+)/sound$', 'fts_main.views.wrap', {'component':'question'},
+   url(r'^answer/(?P<aid>[0-9]+)/sound$', 'fts_main.views.wrap', {'component':'question_answer'},
        name='answer_sound'),
-   url(r'^answer/(?P<aid>[0-9]+)/question$', 'fts_main.views.wrap', {'component':'question'},
+   url(r'^answer/(?P<aid>[0-9]+)/question$', 'fts_main.views.wrap', {'component':'question_answer'},
        name='answer_question'),
-   url(r'^answer/(?P<qid>[0-9]+)/new$', 'fts_main.views.wrap', {'component':'question'},
+   url(r'^answer/(?P<qid>[0-9]+)/new$', 'fts_main.views.wrap', {'component':'question_answer'},
        name='answer_new'),
      # POST sound_file
-   url(r'^answer/(?P<aid>[0-9]+)/status$', 'fts_main.views.answer_status', {'component':'question'},
+   url(r'^answer/(?P<aid>[0-9]+)/status$', 'fts_main.views.answer_status', {'component':'question_answer'},
        name='answer_status'),
      # POST accepted_yes_no
 
@@ -44,24 +44,24 @@ urlpatterns = patterns('',
        name='user_answer_status'),
      # POST accepted_yes_no
    
-   # sms
-   url(r'^sms/send$', 'fts_main.views.wrap', {'component':'sms'}, name='sms_send'),
+   # comm - sms
+   url(r'^comm/sms/send$', 'fts_main.views.wrap', {'component':'comm'}, name='sms_send'),
      # POST user_id, message_type, message_data
    
-   # phone
-   url(r'^phone/call$', 'fts_main.views.wrap', {'component':'phone'}, name='phone_call'),
+   # comm - phone
+   url(r'^comm/phone/call$', 'fts_main.views.wrap', {'component':'comm'}, name='phone_call'),
      # POST user_id, message_type, message_data
    
-   # answer scout
-   url(r'^expert/targets/(?P<qid>[0-9]+)$', 'fts_main.views.wrap', {'component':'answer'},
+   # expert
+   url(r'^expert/targets/(?P<qid>[0-9]+)$', 'fts_main.views.wrap', {'component':'expert'},
        name='expert_targets'),
-   url(r'^expert/new_question$', 'fts_main.views.wrap', {'component':'answer'},
+   url(r'^expert/new_question$', 'fts_main.views.wrap', {'component':'expert'},
        name='expert_new_question'),
       # POST question_id
-   url(r'^expert/new_answer$', 'fts_main.views.wrap', {'component':'answer'},
+   url(r'^expert/new_answer$', 'fts_main.views.wrap', {'component':'expert'},
        name='expert_new_answer'),
       # POST user_id, question_id
-   url(r'^expert/answer_status$', 'fts_main.views.wrap', {'component':'answer'},
+   url(r'^expert/answer_status$', 'fts_main.views.wrap', {'component':'expert'},
        name='expert_answer_status'),
       # POST user_id, question_id, accepted_yes_no
    )
